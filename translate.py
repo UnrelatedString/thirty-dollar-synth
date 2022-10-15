@@ -34,6 +34,8 @@ def translate(in_file, instrument):
     # default BPM for MIDI; meta messages can change it later
     output_stages.append('!speed@120')
 
+    old_velocity = 64
+
     while not all(p.done for p in players):
         # don't bother discriminating between tracks
         # for now
@@ -43,8 +45,10 @@ def translate(in_file, instrument):
             ):
             if message.type == 'note_on':
                 pitch = message.note - 69 # assuming the base is 'concert a'
-                volume = message.velocity / 64
-                output_stages.append(f'!volume@{100 * volume}')
+                if message.velocity != old_velocity:
+                    old_velocity = message.velocity
+                    volume = message.velocity / 64
+                    output_stages.append(f'!volume@{100 * volume}')
                 output_stages.append(f'{instrument}@{pitch}')
                 output_stages.append('!combine')
             elif message.type == 'note_off' and False:
