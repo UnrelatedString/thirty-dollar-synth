@@ -42,10 +42,10 @@ def translate(in_file):
                 p.messages() for p in players
             ):
             if message.type == 'note_on':
-                pitch = message.note - 90 # starting guess
+                pitch = message.note - 64 # second guess
                 # velocity should be easy to handle but will do it later
-                output_stages.append('!combine')
                 output_stages.append(f'stopposting@{pitch}')
+                output_stages.append('!combine')
             elif message.type == 'set_tempo':
                 bpm = mido.tempo2bpm(message.tempo)
                 output_stages.append(f'!speed@{bpm}')
