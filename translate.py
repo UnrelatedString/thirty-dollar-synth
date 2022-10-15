@@ -56,7 +56,6 @@ def translate(in_file):
 
         for p in players:
             p.step(step)
-            print(step)
     
     return '|'.join(output_stages)
 
