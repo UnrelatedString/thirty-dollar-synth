@@ -36,16 +36,19 @@ def translate(in_file):
 
     while not all(p.done for p in players):
         # don't bother discriminating between tracks
-        # or processing stop notes for now
+        # for now
 
         for message in itertools.chain.from_iterable(
                 p.messages() for p in players
             ):
             if message.type == 'note_on':
                 pitch = message.note - 69 # assuming the base is 'concert a'
-                # velocity should be easy to handle but will do it later
+                # volume = message.velocity / 64
+                # output_stages.append(f'!volume@{100 * volume}')
                 output_stages.append(f'stopposting@{pitch}')
                 output_stages.append('!combine')
+            elif message.type == 'note_off' and False:
+                output_stages.append('!cut')
             elif message.type == 'set_tempo':
                 bpm = mido.tempo2bpm(message.tempo)
                 output_stages.append(f'!speed@{bpm}')
