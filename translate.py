@@ -25,7 +25,7 @@ class TrackPlayer:
 
 
 
-def translate(in_file):
+def translate(in_file, instrument):
     mid = mido.MidiFile(in_file)
 
     players = [TrackPlayer(track) for track in mid.tracks]
@@ -43,9 +43,9 @@ def translate(in_file):
             ):
             if message.type == 'note_on':
                 pitch = message.note - 69 # assuming the base is 'concert a'
-                # volume = message.velocity / 64
-                # output_stages.append(f'!volume@{100 * volume}')
-                output_stages.append(f'stopposting@{pitch}')
+                volume = message.velocity / 64
+                output_stages.append(f'!volume@{100 * volume}')
+                output_stages.append(f'{instrument}@{pitch}')
                 output_stages.append('!combine')
             elif message.type == 'note_off' and False:
                 output_stages.append('!cut')

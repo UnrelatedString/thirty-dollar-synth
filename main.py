@@ -7,10 +7,11 @@ def main():
 
     in_file = argv[1]
     if len(argv) > 2:
-        extra_mappings_file = argv[2]
-        # do nothing with it for now lmao
-    
-    print(translate(in_file))
+        instrument = argv[2]
+    else:
+        instrument = 'stopposting'
+        
+    print(translate(in_file, instrument))
 
 if __name__ == '__main__':
     main()
