@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: (C) 2022 UnrelatedString <https://github.com/UnrelatedString>
+
 import mido
 import itertools
 

@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: (C) 2022 UnrelatedString <https://github.com/UnrelatedString>
+
 from sys import argv
 from translate import translate
 
